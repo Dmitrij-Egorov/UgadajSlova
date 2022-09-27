@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class UgadajSlovo {
+
+    static String word = "солнышко";                           // Задаём слово
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // Прячем слово
+        System.out.println("Угадай слово");
+        int lengthWord = word.length();                          //Узнаём длинну слова
+        String maskWord = "*".repeat(lengthWord);               //Повторяем символ сокрытия нужное количество раз
+        System.out.println(maskWord);
+
+        do {
+            System.out.println("Введите буква");
+            char c = input.next().charAt(0);                      //Ввод буквы
+            //Проверяем наличие буквы
+            if (word.indexOf(c) >= 0) {                           //Если буква есть
+                System.out.println("Удача");
+                for (char elem : word.toCharArray()) {             //превращаем слово в массив содержащий char(ы)
+                    if (elem == c) {
+                        maskWord = replaceMaskLetter(c, maskWord); //Заменяем символы сокрытия на угаданную букву
+                    }
+                }
+                System.out.println(maskWord);                      //Выводим результат
+            } else {                                                //Если буквы нет
+                System.out.println("Промах, поробуй еще раз");
+                System.out.println(maskWord);
+            }
+        } while (maskWord.contains("*"));                         // Если символов сокрытия в maskWord нет
+        System.out.println("Поздравляем ты выйграл!");
+    }
+    public static String replaceMaskLetter(char c, String maskWord) { //Метод замены символов
+        StringBuilder stringBuilder = new StringBuilder();           //Создаём изменяемую строку
+        for (int i = 0; i < word.length(); i++) {                   //Проверяем чтобы переменная была равна длинне задонного слова
+            if (word.charAt(i) == c) {                              //Если в слове есть буква
+                stringBuilder.append(c);                            //Доавляем её
+            } else if (maskWord.charAt(i) != '*') {                 //проверяем что заменённая буква не равна символу сокрытия
+                stringBuilder.append(maskWord.charAt(i));           //
+            } else {
+                stringBuilder.append("*");                          //Иначе добавляем символ сокрытия
+            }
+        }
+        return stringBuilder.toString();                            //Изменяемую строку превращаем в обычную и возвращаем
+    }
+
+}
