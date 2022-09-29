@@ -1,1 +1,14 @@
+import javax.swing*;
 
+public class RabOkno {
+
+  public static void main (String [] arg) {
+    
+    JFrame oknoUgadajki = new JFrame (Угадай слово!);
+    oknoUgadajki.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    oknoUgadajki.setSize(400, 500);
+    oknoUgadajki.setVisible(true);
+
+
+  }
+}
