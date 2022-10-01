@@ -1,3 +1,9 @@
+public class vyborSlova {
+int nomerVMassive ();
+int dlinnaMassiva ();
+dlinnaMassiva=massivSlov.lenght;
+
 string [] massivSlov = {
 солнышко, лес, гора, море, дом
+}
 }
