@@ -1,0 +1,10 @@
+import java.util.Random;
+public class VyborSlova {
+    public static void main (String[]args){
+        int min=0;
+        int max=MassaSlov.dlinnaMassiva;
+        int nomerSlova = (int) ((Math.random()*(max-min)+min));
+        String slovo=MassaSlov.slova[nomerSlova];
+        System.out.println(slovo);
+        }
+}
