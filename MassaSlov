@@ -1,0 +1,4 @@
+public class MassaSlov {
+    public static String []slova = {"дерево","солнышко","река","лес","улыбка","ребёнок","работа","программа"};
+    public static int dlinnaMassiva= slova.length;
+}
