@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class UgadajSlovo {
 
-    static String word = "солнышко";                           // Задаём слово
+    static String word = VyborSlovf.slovo;                           // Задаём слово
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
