@@ -1,4 +1,16 @@
-public class MassaSlov {
-    public static String []slova = {"дерево","солнышко","река","лес","улыбка","ребёнок","работа","программа"};
-    public static int dlinnaMassiva= slova.length;
+import java.util.Random;
+
+public class MassivSlov {
+
+//Задаём и наполняем массив слов
+        static String[] slovaM = {"Солнышко", "Азбука", "Книга", "Дерево", "Трава", "Растение", "Водоём", "Озеро", "Река", "Океан"};
+//Создаём генератор случайных чисел
+        static Random rnd = new Random(System.currentTimeMillis());
+// Определяем диапазон выбора случайного числа
+        static int min = 0, max = slovaM.length;
+//Получаем случайное число в заданном диапазоне
+        static int nomerSlova = min + rnd.nextInt(max - min);
+//Получаем случайное слово из нашего массива слов
+
+        static String slovo = slovaM[nomerSlova];
 }
