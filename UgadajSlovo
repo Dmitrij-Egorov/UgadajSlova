@@ -1,49 +1,47 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
-public class UgadajSlovo {
-
-    static String word = VyborSlovf.slovo;                           // Задаём слово
+public class Osnova {
+    static int i, b;//Счётчик циклов, количество букв в слове
+    static boolean kontrol = true;//Переменная для сравнения букв
+    static boolean zavershenie=false;//Переменная победы
+    static String bukva;//Вводимая буква
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner vvod = new Scanner(System.in);//Объявляем сканер
+        System.out.println("Угадай Слово\n\"Вводите строчные буквы Кирилицы\"\n");
+        String[] slovoM = MassivSlov.slovo.toLowerCase().split("");//Превращаем выбранное слово в массив(String) символов
+        b = slovoM.length;//инициализируем переменную равную длинне слова
+        String[] rabochijM= new String[b];//обьявляем и инициализируем переменный массив нужной длинны
+        for(i=0;i<b;i++) rabochijM[i] = "*";//Заполняем переенный массив символаи сокрытия
+        for (i=0;i<b;i++) System.out.print(rabochijM[i]);//Выводим содержимое переменного массива
+        System.out.println("\nВведите букву\n");//Просим ввести букву
+        while (vvod.hasNext()) {//Начало главного цикла
+            bukva = vvod.next();// ввод буквы
+            if (MassivSlov.slovo.toLowerCase().contains(bukva))//Проверяем содержится ли буква в слове
+            kontrol=true;//Если содержится установить значение истина
+            else kontrol=false;//Если не содержится установить значение ложь
+            if (kontrol) {
+                for (i=0;i<b;i++) {
+                    if (bukva.equalsIgnoreCase(slovoM[i]))
+                        rabochijM[i] = bukva;}//Вносим отгаданную букву в переменный массив
+                System.out.println("\nУгадали!\nБуква "+bukva+" Есть в этом слове");//Сообщаем пользователю об успешно угаданной букве
+                for (i=0;i<b;i++) {
+                    System.out.print(rabochijM[i]);}//Вывод переменного массива
+                System.out.print("\nПродолжайте\n");//Предлагаем пользователю продолжить
+            }//Если истина вполняем блок кода выше
+            else {
+                System.out.println("\nБуквы "+bukva+" нет!\nПопробуй ещё раз!");//Сообщаем пользователю о неудаче
+                for (i=0;i<b;i++) {System.out.print(rabochijM[i]);}//Выводим переменный массив
+                System.out.print("\n");}//Если ложь выполняем блок кода выше
+            String testZ=Arrays.toString(rabochijM);//Обьявляем и инициализируем переменную для проверки "Все ли буквы отгаданны"
+            if (testZ.contains("*")) zavershenie=false;//Если не все буквы отгаданны переменная Победы ложна
+            else zavershenie=true;//Если все буквы отгаданны переменная Победы истинна
+           if (zavershenie) {
+                System.out.println("\nПоздравляю!!!\nВы угадали это слово - "+MassivSlov.slovo);//Сообщаем пользователю о победе
+                break;//Завершаем главный цикл
+           }//Если переменная победы истинна выполняем блок кода выше
+        }//Конец главного цикла
 
-        // Прячем слово
-        System.out.println("Угадай слово");
-        int lengthWord = word.length();                          //Узнаём длинну слова
-        String maskWord = "*".repeat(lengthWord);               //Повторяем символ сокрытия нужное количество раз
-        System.out.println(maskWord);
-
-        do {
-            System.out.println("Введите буква");
-            char c = input.next().charAt(0);                      //Ввод буквы
-            //Проверяем наличие буквы
-            if (word.indexOf(c) >= 0) {                           //Если буква есть
-                System.out.println("Удача");
-                for (char elem : word.toCharArray()) {             //превращаем слово в массив содержащий char(ы)
-                    if (elem == c) {
-                        maskWord = replaceMaskLetter(c, maskWord); //Заменяем символы сокрытия на угаданную букву
-                    }
-                }
-                System.out.println(maskWord);                      //Выводим результат
-            } else {                                                //Если буквы нет
-                System.out.println("Промах, поробуй еще раз");
-                System.out.println(maskWord);
-            }
-        } while (maskWord.contains("*"));                         // Если символов сокрытия в maskWord нет
-        System.out.println("Поздравляем ты выйграл!");
     }
-    public static String replaceMaskLetter(char c, String maskWord) { //Метод замены символов
-        StringBuilder stringBuilder = new StringBuilder();           //Создаём изменяемую строку
-        for (int i = 0; i < word.length(); i++) {                   //Проверяем чтобы переменная была равна длинне задонного слова
-            if (word.charAt(i) == c) {                              //Если в слове есть буква
-                stringBuilder.append(c);                            //Доавляем её
-            } else if (maskWord.charAt(i) != '*') {                 //проверяем что заменённая буква не равна символу сокрытия
-                stringBuilder.append(maskWord.charAt(i));           //
-            } else {
-                stringBuilder.append("*");                          //Иначе добавляем символ сокрытия
-            }
-        }
-        return stringBuilder.toString();                            //Изменяемую строку превращаем в обычную и возвращаем
-    }
-
 }
